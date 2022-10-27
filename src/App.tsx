@@ -1,10 +1,13 @@
 import { BrowserRouter } from 'react-router-dom';
+import { CocktailProvider } from './contexts/cocktail';
 import { Router } from './Router';
 
 function App() {
   return (
     <BrowserRouter>
-      <Router />
+      <CocktailProvider>
+        <Router />
+      </CocktailProvider>
     </BrowserRouter>
   );
 }
