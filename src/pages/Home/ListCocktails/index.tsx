@@ -18,7 +18,7 @@ export function ListCocktails() {
     handleFetchCocktails();
   }, []);
   return (
-    <Grid container my={2} spacing={2}>
+    <Grid container my={2}>
       {loading ? (
         <Box
           sx={{
@@ -37,7 +37,7 @@ export function ListCocktails() {
             item
             xs={3}
             key={cocktail.idDrink}
-            sx={{ display: 'flex', justifyContent: 'center' }}
+            sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}
           >
             <CocktailCard cocktail={cocktail} />
           </Grid>
