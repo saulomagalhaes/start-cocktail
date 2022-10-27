@@ -48,9 +48,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export function Header() {
   const [filter, setFilter] = React.useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [name, setName] = React.useState('');
+
+  const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
   };
+
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   return (
     <AppBar position="static" color="primary" component="header">
       <Toolbar>
@@ -62,7 +69,7 @@ export function Header() {
             label="Selecione o filtro"
             select
             value={filter}
-            onChange={handleChange}
+            onChange={handleChangeFilter}
             fullWidth
             size="small"
           >
@@ -78,6 +85,8 @@ export function Header() {
           <StyledInputBase
             placeholder="Buscar…"
             inputProps={{ 'aria-label': 'search' }}
+            onChange={handleChangeName}
+            value={name}
           />
         </Search>
       </Toolbar>
