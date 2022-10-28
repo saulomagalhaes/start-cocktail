@@ -1,21 +1,15 @@
 import { createContext, ReactNode, useState } from 'react';
-
-interface ICocktailFilter {
-  filter: string;
-  name: string;
-}
-interface ICocktailContext {
-  cocktailByCategory: string;
-  setCocktailByCategory: (cocktails: string) => void;
-  cocktailByFilter: ICocktailFilter;
-  setCocktailByFilter: (filters: ICocktailFilter) => void;
-}
+import {
+  ICocktailCategory,
+  ICocktailContext,
+  ICocktailFilter,
+} from '../interfaces/ICocktail';
 
 export const CocktailContext = createContext({} as ICocktailContext);
 
 export function CocktailProvider({ children }: { children: ReactNode }) {
   const [cocktailByCategory, setCocktailByCategory] =
-    useState<string>('Ordinary Drink');
+    useState<ICocktailCategory>({ category: 'Ordinary Drink' });
 
   const [cocktailByFilter, setCocktailByFilter] = useState<ICocktailFilter>(
     {} as ICocktailFilter
