@@ -20,7 +20,7 @@ export function CategoryButtons() {
   const { setCocktailByCategory } = useContext(CocktailContext);
 
   const handleClick = (category: string) => {
-    setCocktailByCategory(category);
+    setCocktailByCategory({ category });
   };
 
   return (
@@ -28,7 +28,7 @@ export function CategoryButtons() {
       <Typography variant="h5" sx={{ marginTop: 1, marginLeft: 1 }}>
         Buscar por Categoria
       </Typography>
-      <Grid container my={1}>
+      <Grid container my={1} sx={{ display: 'flex', justifyContent: 'center' }}>
         {categories.map((category) => (
           <Grid key={category} item xs={2}>
             <Button
