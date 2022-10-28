@@ -1,48 +1,43 @@
-import { Box, CircularProgress, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { ICocktail } from '../../../interfaces/ICocktail';
-import { fetchCocktails } from '../../../services/axios';
-import { CocktailCard } from './CocktailCard';
+import { Grid } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
+import { Loading } from '../../../components/Loading';
+import { CocktailContext } from '../../../contexts/cocktail';
+import { ICocktail, ICocktailFilter } from '../../../interfaces/ICocktail';
+import { fetchByCategory, fetchByFilter } from '../../../services/axios';
+import { Cards } from './Cards';
 
 export function ListCocktails() {
   const [cocktails, setCocktails] = useState<ICocktail[]>([]);
   const [loading, setLoading] = useState(true);
+  const { cocktailByCategory, cocktailByFilter } = useContext(CocktailContext);
 
-  const handleFetchCocktails = async () => {
-    const response = await fetchCocktails();
+  const handleFetchByCategory = async (category: string) => {
+    const response = await fetchByCategory(category);
     setCocktails(response);
     setLoading(false);
   };
 
   useEffect(() => {
-    handleFetchCocktails();
-  }, []);
+    const { category } = cocktailByCategory;
+    handleFetchByCategory(category);
+  }, [cocktailByCategory]);
+
+  const handleFetchByFilter = async ({ filter, name }: ICocktailFilter) => {
+    const response = await fetchByFilter(filter, name);
+    setCocktails(response);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (Object.keys(cocktailByFilter).length === 0) {
+      return;
+    }
+    handleFetchByFilter(cocktailByFilter);
+  }, [cocktailByFilter]);
+
   return (
     <Grid container my={2}>
-      {loading ? (
-        <Box
-          sx={{
-            display: 'flex',
-            width: '100vw',
-            height: '100vh',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <CircularProgress size={100} />
-        </Box>
-      ) : (
-        cocktails.map((cocktail) => (
-          <Grid
-            item
-            xs={3}
-            key={cocktail.idDrink}
-            sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}
-          >
-            <CocktailCard cocktail={cocktail} />
-          </Grid>
-        ))
-      )}
+      {loading ? <Loading /> : <Cards cocktails={cocktails} />}
     </Grid>
   );
 }
