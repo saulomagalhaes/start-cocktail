@@ -41,3 +41,18 @@ export interface ICocktail {
   strMeasure14: string;
   strMeasure15: string;
 }
+
+export interface ICocktailFilter {
+  filter: string;
+  name: string;
+}
+export interface ICocktailContext {
+  cocktailByCategory: ICocktailCategory;
+  setCocktailByCategory: (category: ICocktailCategory) => void;
+  cocktailByFilter: ICocktailFilter;
+  setCocktailByFilter: (filters: ICocktailFilter) => void;
+}
+
+export interface ICocktailCategory {
+  category: string;
+}
