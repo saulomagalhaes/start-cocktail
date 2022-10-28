@@ -1,9 +1,17 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { AppBar, Box, MenuItem, TextField, Toolbar } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Button,
+  MenuItem,
+  TextField,
+  Toolbar,
+} from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { alpha, styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/startrecipe.png';
+import { CocktailContext } from '../../contexts/cocktail';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,8 +55,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Header() {
-  const [filter, setFilter] = React.useState('');
-  const [name, setName] = React.useState('');
+  const [filter, setFilter] = useState('');
+  const [name, setName] = useState('');
+  const [disableButon, setDisableButon] = useState(true);
+
+  useEffect(() => {
+    if (filter === '' || name === '') {
+      setDisableButon(true);
+    } else {
+      setDisableButon(false);
+    }
+  }, [filter, name]);
+
+  const { setCocktailByFilter } = useContext(CocktailContext);
 
   const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(event.target.value);
@@ -89,6 +108,15 @@ export function Header() {
             value={name}
           />
         </Search>
+        <Button
+          variant="contained"
+          size="medium"
+          color="success"
+          onClick={() => setCocktailByFilter({ filter, name })}
+          disabled={disableButon}
+        >
+          Buscar
+        </Button>
       </Toolbar>
     </AppBar>
   );
