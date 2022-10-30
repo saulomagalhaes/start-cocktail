@@ -27,3 +27,14 @@ export const fetchByCategory = async (
     return [];
   }
 };
+
+export const fetchById = async (id: string): Promise<ICocktail[]> => {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  try {
+    const response = await axios.get<ICocktails>(url);
+    return response.data.drinks;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
