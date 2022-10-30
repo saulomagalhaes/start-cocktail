@@ -56,3 +56,8 @@ export interface ICocktailContext {
 export interface ICocktailCategory {
   category: string;
 }
+
+export interface IIgredientesAndMeasures {
+  ingredient: string;
+  measure: string;
+}
