@@ -1,6 +1,4 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loading } from '../../../components/Loading';
 import {
   ICocktail,
   IIgredientesAndMeasures,
@@ -40,6 +39,7 @@ export function CocktailDetailCard() {
   const [igredientsAndMeasures, setIgredientsAndMeasures] = useState<
     IIgredientesAndMeasures[]
   >([]);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
@@ -71,6 +71,7 @@ export function CocktailDetailCard() {
       const cocktail = await fetchById(id);
       setCocktail(cocktail);
       handleCocktail(cocktail);
+      setLoading(false);
     }
   };
 
@@ -87,58 +88,62 @@ export function CocktailDetailCard() {
       sx={{
         display: 'flex',
         heigth: '100vh',
-        width: '100vw',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 6,
       }}
     >
-      {cocktail.map((cocktail) => (
-        <Card key={cocktail.idDrink} sx={{ maxWidth: 345, minWidth: 350 }}>
-          <CardHeader title={cocktail.strDrink} />
-          <CardMedia
-            component="img"
-            height="200"
-            image={cocktail.strDrinkThumb}
-            alt="Paella dish"
-          />
-          <CardContent>
-            {igredientsAndMeasures.map((item) => (
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                key={item.ingredient}
-              >
-                {`Igredient: ${item.ingredient} -> Measure: ${
-                  item.measure ? item.measure : 'To be defined'
-                }`}
-              </Typography>
-            ))}
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </ExpandMore>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {loading ? (
+        <Loading />
+      ) : (
+        cocktail.map((cocktail) => (
+          <Card key={cocktail.idDrink} sx={{ maxWidth: 300, minWidth: 300 }}>
+            <CardHeader title={cocktail.strDrink} />
+            <CardMedia
+              component="img"
+              height="200"
+              image={cocktail.strDrinkThumb}
+              alt="Paella dish"
+            />
             <CardContent>
-              <Typography paragraph>Preparation mode:</Typography>
-              <Typography paragraph>{cocktail.strInstructions}</Typography>
+              <Typography variant="body1" color="text.secondary">
+                Igredients
+              </Typography>
+              {igredientsAndMeasures.map((item) => (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  key={item.ingredient}
+                >
+                  {`${item.ingredient} - ${
+                    item.measure ? item.measure : 'To be defined'
+                  }`}
+                </Typography>
+              ))}
             </CardContent>
-          </Collapse>
-        </Card>
-      ))}
+            <CardActions disableSpacing>
+              <Typography variant="body1" color="text.secondary" ml={1}>
+                Mais Detalhes
+              </Typography>
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography paragraph>Preparation mode:</Typography>
+                <Typography paragraph>{cocktail.strInstructions}</Typography>
+              </CardContent>
+            </Collapse>
+          </Card>
+        ))
+      )}
     </Box>
   );
 }
