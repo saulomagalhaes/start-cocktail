@@ -6,6 +6,7 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import { ICocktail } from '../../../../../interfaces/ICocktail';
 
 export function CardCocktail({ cocktail }: { cocktail: ICocktail }) {
@@ -29,9 +30,11 @@ export function CardCocktail({ cocktail }: { cocktail: ICocktail }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" variant="outlined">
-          Detalhes
-        </Button>
+        <NavLink to={`/cocktail/${cocktail.idDrink}`}>
+          <Button size="small" variant="outlined">
+            Detalhes
+          </Button>
+        </NavLink>
       </CardActions>
     </Card>
   );
