@@ -65,7 +65,7 @@ export function Header() {
         <Button
           variant="contained"
           size="medium"
-          color="success"
+          color="secondary"
           onClick={() => setCocktailByFilter({ filter, name })}
           disabled={disableButon}
           sx={{ ml: 2 }}
