@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { CocktailDetail } from './pages/CocktailDetail';
 import { Home } from './pages/Home';
 
@@ -7,6 +7,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cocktail/:id" element={<CocktailDetail />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
