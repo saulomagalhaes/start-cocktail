@@ -30,7 +30,7 @@ export function CategoryButtons() {
       </Typography>
       <Grid container my={1} sx={{ display: 'flex', justifyContent: 'center' }}>
         {categories.map((category) => (
-          <Grid key={category} item xs={2}>
+          <Grid key={category} item xs={8} sm={4} md={3} lg={2}>
             <Button
               onClick={() => handleClick(category)}
               size="small"

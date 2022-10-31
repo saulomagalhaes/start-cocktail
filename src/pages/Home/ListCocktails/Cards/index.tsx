@@ -19,7 +19,10 @@ export function Cards({ cocktails }: { cocktails: ICocktail[] }) {
       {cocktails.map((cocktail) => (
         <Grid
           item
-          xs={3}
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
           key={cocktail.idDrink}
           sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}
         >
