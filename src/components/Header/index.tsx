@@ -33,11 +33,18 @@ export function Header() {
 
   return (
     <AppBar position="static" color="primary" component="header">
-      <Toolbar>
+      <Toolbar
+        sx={{
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+          },
+        }}
+      >
         <Box sx={{ flexGrow: 1 }}>
           <Box component="img" src={logo} alt="Start Recipe" height="5rem" />
         </Box>
-        <Box width="250px">
+        <Box width="250px" my={1}>
           <Filter
             label="Selecione o filtro"
             select
@@ -51,7 +58,7 @@ export function Header() {
             <MenuItem value="f">Primeira Letra</MenuItem>
           </Filter>
         </Box>
-        <Search>
+        <Search sx={{ marginBottom: { xs: '8px', sm: '0px' } }}>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -68,7 +75,16 @@ export function Header() {
           color="secondary"
           onClick={() => setCocktailByFilter({ filter, name })}
           disabled={disableButon}
-          sx={{ ml: 2 }}
+          sx={{
+            ml: {
+              xs: 0,
+              sm: 2,
+            },
+            mb: {
+              xs: 1,
+              sm: 0,
+            },
+          }}
         >
           Buscar
         </Button>
