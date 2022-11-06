@@ -67,6 +67,7 @@ export function Header() {
             inputProps={{ 'aria-label': 'search' }}
             onChange={handleChangeName}
             value={name}
+            data-testid="input"
           />
         </Search>
         <Button

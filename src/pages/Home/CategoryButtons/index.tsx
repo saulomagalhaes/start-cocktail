@@ -43,6 +43,7 @@ export function CategoryButtons() {
             }}
           >
             <Button
+              data-testid="category-button"
               onClick={() => handleClick(category)}
               size="small"
               variant="contained"

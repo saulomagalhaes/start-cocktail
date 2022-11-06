@@ -31,7 +31,7 @@ export function CardCocktail({ cocktail }: { cocktail: ICocktail }) {
       </CardContent>
       <CardActions>
         <NavLink to={`/cocktail/${cocktail.idDrink}`}>
-          <Button size="small" variant="outlined">
+          <Button size="small" variant="outlined" data-testid="details">
             Detalhes
           </Button>
         </NavLink>
