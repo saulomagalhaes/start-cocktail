@@ -47,3 +47,6 @@ Execute a aplicação:
 ```bash
  npm run dev
 ```
+
+Acesse a aplicação em:
+http://localhost:5173
