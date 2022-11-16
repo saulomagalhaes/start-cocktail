@@ -2,6 +2,10 @@
 
 Esta aplicação consiste em um sistema para busca de receitas de coquetéis.
 
+## Screenshot
+
+![App Screenshot](https://github.com/saulomagalhaes/start-cocktail/blob/main/src/assets/screenshot.png?raw=true)
+
 ## Deploy
 
 Acesse o link para ver a aplicação em funcionamento:
@@ -48,5 +52,14 @@ Execute a aplicação:
  npm run dev
 ```
 
-Acesse a aplicação em:
+## Acesse a aplicação em:
 http://localhost:5173
+
+
+## Rodando os testes
+
+Para rodar os testes, rode o seguinte comando
+
+```bash
+  npm run test
+```
